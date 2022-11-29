@@ -1,19 +1,28 @@
 let myCounter = document.getElementById("myCounter");
-let button1 = document.createElement("button");
-button1.innerHTML = "-";
-let button2 = document.createElement("button");
-button2.innerHTML = "+";
-let counter = document.createElement("h3");
-counter.innerHTML = 0;
 
-myCounter.appendChild(button1);
-myCounter.appendChild(counter);
-myCounter.appendChild(button2);
+function addElement(tagName, display, id) {
+    let element = document.createElement(tagName)
+    element.innerHTML = display;
+    element.setAttribute("id", id);
+    myCounter.appendChild(element);
+}
 
-button1.onclick = function() {
-    counter.innerHTML--;
-};
+addElement("button", "-", "buttonMinus");
+addElement("h3", "0", "counter");
+addElement("button", "+", "buttonPlus");
 
-button2.onclick = function() {
-    counter.innerHTML++;
+let buttonMinus = document.getElementById("buttonMinus");
+let counter = document.getElementById("counter");
+let buttonPlus = document.getElementById("buttonPlus");
+
+myCounter.addEventListener("click", clickButtons);
+
+function clickButtons (event){
+    let target = event.target;
+    if (target.tagName != 'BUTTON') return;
+    if (target.id == "buttonMinus") {
+        counter.innerHTML--;
+    } else {
+        counter.innerHTML++;
+    }
 };
